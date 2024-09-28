@@ -37,11 +37,15 @@ function createWindow() {
   }
 }
 
+const IPC_HANDLERS = {
+  'dialog:openFile': handleFileOpen
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  ipcMain.handle('dialog:openFile', handleFileOpen)
+  Object.keys(IPC_HANDLERS).forEach((channel) => ipcMain.handle(channel, IPC_HANDLERS[channel]))
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
