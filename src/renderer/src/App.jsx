@@ -1,35 +1,24 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
+import { useState } from 'react'
 
-function App() {
-  const ipcHandle = () => window.electron.ipcRenderer.send('ping')
+const App = () => {
+  const [loading, setLoading] = useState(false)
+  const [filePath, setFilePath] = useState('')
 
+  const openDialog = async () => {
+    setLoading(true)
+    const path = await window.api.openFile()
+
+    setFilePath(path)
+    setLoading(false)
+  }
   return (
     <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
+      <div className="action">
+        <button onClick={openDialog}>Open directory</button>
       </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
-      </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
-      </div>
-      <Versions></Versions>
+      <div>{loading ? '...' : filePath}</div>
     </>
   )
 }
 
 export default App
-
