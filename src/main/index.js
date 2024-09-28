@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
-import { handleFileOpen } from './file'
+import { getAllImageFileNames, handleFileOpen } from './file'
 
 function createWindow() {
   // Create the browser window.
@@ -38,7 +38,8 @@ function createWindow() {
 }
 
 const IPC_HANDLERS = {
-  'dialog:openFile': handleFileOpen
+  'dialog:openFile': handleFileOpen,
+  'file:getAllImageFileNames': getAllImageFileNames
 }
 
 // This method will be called when Electron has finished
