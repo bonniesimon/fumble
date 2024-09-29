@@ -1,16 +1,19 @@
 import OpenDialog from './components/OpenDialog'
-import { Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import routes from './constants/routes'
 import Files from './components/Files'
+import { Router } from '../../lib/electron-router-dom'
 
 const App = () => {
   return (
-    <>
-      <Switch>
-        <Route component={OpenDialog} path={routes.home} />
-        <Route component={Files} path={routes.files} />
-      </Switch>
-    </>
+    <Router
+      main={
+        <>
+          <Route path={routes.index} element={<OpenDialog />} />
+          <Route path={routes.files} element={<Files />} />
+        </>
+      }
+    />
   )
 }
 
