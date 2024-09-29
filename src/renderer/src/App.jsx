@@ -1,33 +1,15 @@
-import { useState } from 'react'
+import OpenDialog from './components/OpenDialog'
+import { Switch, Route } from 'react-router-dom'
+import routes from './constants/routes'
+import Files from './components/Files'
 
 const App = () => {
-  const [loading, setLoading] = useState(false)
-  const [filePath, setFilePath] = useState('')
-  const [files, setFiles] = useState([])
-
-  const openDialog = async () => {
-    setLoading(true)
-    const path = await window.api.openFile()
-    const files = await window.api.getAllImageFileNames(path)
-
-    setFilePath(path)
-    setFiles(files)
-    setLoading(false)
-  }
-
-  if (filePath === '') {
-    return (
-      <div className="action">
-        <button onClick={openDialog}>Open directory</button>
-      </div>
-    )
-  }
   return (
     <>
-      <div>{loading ? '...' : filePath}</div>
-      {files?.map((file) => (
-        <li key={file}>{file}</li>
-      ))}
+      <Switch>
+        <Route component={OpenDialog} path={routes.home} />
+        <Route component={Files} path={routes.files} />
+      </Switch>
     </>
   )
 }
