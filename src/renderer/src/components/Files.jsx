@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import routes from '../constants/routes'
+import { FILE_PROTOCOL } from '../../../shared/fileProtocol'
 
 const Files = () => {
   const [searchParams] = useSearchParams()
@@ -23,7 +24,7 @@ const Files = () => {
       <Link to={routes.index}>Open another directory</Link>
       <div>{searchParams.get('path')}</div>
       {files?.map((file) => (
-        <li key={file}>{file}</li>
+        <img key={file} src={`${FILE_PROTOCOL}:///${searchParams.get('path')}/${file}`} />
       ))}
     </>
   )

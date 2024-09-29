@@ -1,10 +1,12 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { electronApp, optimizer } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { registerRoute } from '../lib/electron-router-dom'
+import { protocol } from 'electron'
 
 import { getAllImageFileNames, handleFileOpen } from './file'
+import { FILE_PROTOCOL } from '../shared/fileProtocol'
 
 function createWindow() {
   // Create the browser window.
@@ -45,6 +47,8 @@ function createWindow() {
   // }
 }
 
+protocol.registerSchemesAsPrivileged([{ scheme: FILE_PROTOCOL, privileges: { bypassCSP: true } }])
+
 const IPC_HANDLERS = {
   'dialog:openFile': handleFileOpen,
   'file:getAllImageFileNames': getAllImageFileNames
@@ -54,6 +58,16 @@ const IPC_HANDLERS = {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  protocol.registerFileProtocol(FILE_PROTOCOL, (request, callback) => {
+    const url = request.url.replace(`${FILE_PROTOCOL}://`, '')
+    try {
+      return callback(decodeURIComponent(url))
+    } catch (error) {
+      // Handle the error as needed
+      console.error(error)
+    }
+  })
+
   Object.keys(IPC_HANDLERS).forEach((channel) => ipcMain.handle(channel, IPC_HANDLERS[channel]))
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
