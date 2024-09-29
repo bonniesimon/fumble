@@ -24,7 +24,11 @@ const Files = () => {
       <Link to={routes.index}>Open another directory</Link>
       <div>{searchParams.get('path')}</div>
       {files?.map((file) => (
-        <img key={file} src={`${FILE_PROTOCOL}:///${searchParams.get('path')}/${file}`} />
+        <img
+          className="image"
+          key={file}
+          src={`${FILE_PROTOCOL}:///${searchParams.get('path')}/${file}`}
+        />
       ))}
     </>
   )

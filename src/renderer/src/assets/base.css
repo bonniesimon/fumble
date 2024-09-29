@@ -65,3 +65,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.image {
+  height: 400px;
+  width: auto;
+}
