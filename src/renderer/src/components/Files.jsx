@@ -5,12 +5,12 @@ import { FILE_PROTOCOL } from '../../../shared/fileProtocol'
 
 const Files = () => {
   const [searchParams] = useSearchParams()
-  const [files, setFiles] = useState([])
+  const [images, setImages] = useState([])
   console.log({ searchParams: searchParams.get('path') })
 
   const getFilesForPath = async () => {
     const files = await window.api.getAllImageFileNames(searchParams.get('path'))
-    setFiles(files)
+    setImages(files.filter((filename) => filename !== '.DS_Store'))
   }
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Files = () => {
     <>
       <Link to={routes.index}>Open another directory</Link>
       <div>{searchParams.get('path')}</div>
-      {files?.map((file) => (
+      {images?.map((file) => (
         <img
           className="image"
           key={file}
