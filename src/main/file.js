@@ -1,5 +1,6 @@
 import { dialog } from 'electron/main'
 import { readdir } from 'fs/promises'
+import { extname } from 'path'
 
 const handleFileOpen = async () => {
   const { canceled, filePaths } = await dialog.showOpenDialog({
@@ -10,6 +11,13 @@ const handleFileOpen = async () => {
   }
 }
 
-const getAllImageFileNames = async (_, path) => await readdir(path)
+const getAllImageFileNames = async (_, path) => {
+  const allFiles = await readdir(path)
+  const imageFiles = allFiles.filter((file) =>
+    ['.jpg', '.jpeg', '.png', '.gif'].includes(extname(file).toLowerCase())
+  )
+
+  return imageFiles
+}
 
 export { handleFileOpen, getAllImageFileNames }
