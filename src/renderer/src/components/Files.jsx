@@ -78,7 +78,7 @@ const Files = () => {
                {filesToBeDeleted.map(filename => (
                   <li key={filename}>{filename}</li>
                ))}
-               <div className="flex flex-col justify-center">
+               <div className="flex flex-col justify-center mt-12 space-y-5">
                   <p>Are you sure you want to delete all the above images?</p>
                   <button className="button success w-fit mx-auto" onClick={handleBulkDeletion}>
                      Confirm deletion
