@@ -11,9 +11,7 @@ const Breadcrumbs = ({ currentPath }) => {
             <span className="text-lavender">/</span>
             {path.length > 3 ? (
                <>
-                  <span className="text-lavender hover:text-blue-600 cursor-pointer">
-                     {path[0]}
-                  </span>
+                  <span className="text-lavender">{path[0]}</span>
                   <span className="text-lavender">/</span>
                   <div className="flex items-center text-lavender">...</div>
                   {path.slice(-2).map((item, index) => (
@@ -21,9 +19,7 @@ const Breadcrumbs = ({ currentPath }) => {
                         <span className="text-lavender">/</span>
                         <span
                            className={`${
-                              index === 1
-                                 ? "text-lavender font-medium"
-                                 : "text-lavender hover:text-blue-600 cursor-pointer"
+                              index === 1 ? "text-lavender font-medium" : "text-lavender"
                            }`}
                         >
                            {item}
@@ -37,9 +33,7 @@ const Breadcrumbs = ({ currentPath }) => {
                      {index > 0 && <span className="text-lavender">/</span>}
                      <span
                         className={`${
-                           index === path.length - 1
-                              ? "text-lavender font-medium"
-                              : "text-lavender hover:text-blue-600 cursor-pointer"
+                           index === path.length - 1 ? "text-lavender font-medium" : "text-lavender"
                         }`}
                      >
                         {item}
