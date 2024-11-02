@@ -11,7 +11,7 @@
       @apply bg-violet-blue-500;
     }
 
-    &.delete {
+    &.danger {
       @apply bg-poppy-500;
 
       &:hover {
@@ -19,11 +19,11 @@
       }
     }
 
-    &.accept {
-      @apply bg-emerald-500;
+    &.success {
+      @apply bg-emerald-500 text-raisin-black-500;
 
       &:hover {
-        @apply bg-pigment-green-500;
+        @apply bg-pigment-green-500 text-raisin-black-500;
       }
     }
 

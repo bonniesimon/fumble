@@ -11,8 +11,8 @@ import { FILE_PROTOCOL } from "../shared/fileProtocol";
 function createWindow() {
    // Create the browser window.
    const mainWindow = new BrowserWindow({
-      width: 900,
-      height: 670,
+      width: 1400,
+      height: 847,
       show: false,
       autoHideMenuBar: true,
       ...(process.platform === "linux" ? { icon } : {}),

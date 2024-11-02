@@ -52,21 +52,25 @@ const Files = () => {
    }, []);
 
    return (
-      <>
-         <Link to={routes.index}>Open another directory</Link>
-         <div>{searchParams.get("path")}</div>
+      <div className="w-full h-screen px-5 py-5 flex flex-col justify-center items-center">
          {images.length > 0 && currentImageIndex < images.length && !showFinalScreen && (
-            <>
-               <img
-                  className="image"
-                  key={images[currentImageIndex]}
-                  src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
-               />
-               <div className="flex flex-row justify-between">
-                  <button onClick={handlePassImage}>Pass</button>
-                  <button onClick={handleSmashImage}>Smash</button>
+            <div className="space-y-5 w-full flex flex-col justify-between items-center">
+               <div className="">
+                  <img
+                     className="image w-[1280] h-[720]"
+                     key={images[currentImageIndex]}
+                     src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
+                  />
                </div>
-            </>
+               <div className="flex flex-row justify-between w-4/12">
+                  <button className="button danger px-12 py-4" onClick={handlePassImage}>
+                     Delete
+                  </button>
+                  <button className="button success px-12 py-4" onClick={handleSmashImage}>
+                     keep
+                  </button>
+               </div>
+            </div>
          )}
          {showFinalScreen && (
             <div className="flex flex-col">
@@ -76,12 +80,20 @@ const Files = () => {
                ))}
                <div className="flex flex-col justify-center">
                   <p>Are you sure you want to delete all the above images?</p>
-                  <button onClick={handleBulkDeletion}>Confirm deletion</button>
+                  <button className="button success w-fit mx-auto" onClick={handleBulkDeletion}>
+                     Confirm deletion
+                  </button>
                </div>
                {deletionInProgress && <p>Deleting files....</p>}
             </div>
          )}
-      </>
+         <footer className="mt-12 mb-4 w-full flex flex-col justify-center space-y-5">
+            <p className="w-fit mx-auto">Current folder: {searchParams.get("path")}</p>
+            <Link className="button accent mx-auto" to={routes.index}>
+               Open another directory
+            </Link>
+         </footer>
+      </div>
    );
 };
 
