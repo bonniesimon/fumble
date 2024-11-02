@@ -5,7 +5,7 @@ import icon from '../../resources/icon.png?asset'
 import { registerRoute } from '../lib/electron-router-dom'
 import { protocol } from 'electron'
 
-import { getAllImageFileNames, handleFileOpen } from './file'
+import { bulkDeleteFiles, getAllImageFileNames, handleFileOpen } from './file'
 import { FILE_PROTOCOL } from '../shared/fileProtocol'
 
 function createWindow() {
@@ -51,7 +51,8 @@ protocol.registerSchemesAsPrivileged([{ scheme: FILE_PROTOCOL, privileges: { byp
 
 const IPC_HANDLERS = {
   'dialog:openFile': handleFileOpen,
-  'file:getAllImageFileNames': getAllImageFileNames
+  'file:getAllImageFileNames': getAllImageFileNames,
+  'file:bulkDelete': bulkDeleteFiles
 }
 
 // This method will be called when Electron has finished

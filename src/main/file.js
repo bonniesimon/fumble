@@ -1,5 +1,5 @@
 import { dialog } from 'electron/main'
-import { readdir } from 'fs/promises'
+import { readdir, unlink } from 'fs/promises'
 import { extname } from 'path'
 
 const handleFileOpen = async () => {
@@ -20,4 +20,6 @@ const getAllImageFileNames = async (_, path) => {
   return imageFiles
 }
 
-export { handleFileOpen, getAllImageFileNames }
+const bulkDeleteFiles = (filePaths) => Promise.all(filePaths.map((path) => unlink(path)))
+
+export { handleFileOpen, getAllImageFileNames, bulkDeleteFiles }
