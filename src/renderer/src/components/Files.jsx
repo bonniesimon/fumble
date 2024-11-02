@@ -3,6 +3,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import routes from "../constants/routes";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import ProgressBar from "./ProgressBar";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Files = () => {
    const [images, setImages] = useState([]);
@@ -89,6 +90,7 @@ const Files = () => {
                {deletionInProgress && <p>Deleting files....</p>}
             </div>
          )}
+         <Breadcrumbs currentPath={searchParams.get("path")} />
          <footer className="sticky top-full mt-12 mb-4 w-full flex flex-col justify-center space-y-5">
             <p className="w-fit mx-auto text-sm">Current folder: {searchParams.get("path")}</p>
             <Link className="button accent mx-auto text-sm px-3 py-1 font-normal" to={routes.index}>
