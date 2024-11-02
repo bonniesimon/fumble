@@ -1,6 +1,5 @@
 module.exports = {
    extends: [
-      "plugin:json/recommended",
       "eslint:recommended",
       "plugin:react/recommended",
       "plugin:react/jsx-runtime",

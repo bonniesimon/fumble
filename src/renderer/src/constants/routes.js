@@ -1,6 +1,6 @@
 const routes = {
-  index: '/',
-  files: 'files'
-}
+   index: "/",
+   files: "files",
+};
 
-export default routes
+export default routes;

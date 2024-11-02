@@ -1,1 +1,1 @@
-export const FILE_PROTOCOL = 'file-protocol'
+export const FILE_PROTOCOL = "file-protocol";
