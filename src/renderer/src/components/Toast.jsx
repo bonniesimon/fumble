@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-// eslint-disable-next-line react/prop-types
 const Toast = ({ message, onClose }) => {
    const [visible, setVisible] = useState(true);
 

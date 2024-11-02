@@ -6,4 +6,7 @@ module.exports = {
       "@electron-toolkit",
       "@electron-toolkit/eslint-config-prettier",
    ],
+   rules: {
+      "react/prop-types": 0,
+   },
 };
