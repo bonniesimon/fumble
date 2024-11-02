@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import routes from "../constants/routes";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
+import ProgressBar from "./ProgressBar";
 
 const Files = () => {
    const [images, setImages] = useState([]);
@@ -70,6 +71,7 @@ const Files = () => {
                      keep
                   </button>
                </div>
+               <ProgressBar current={currentImageIndex} total={images.length} />
             </div>
          )}
          {showFinalScreen && (
