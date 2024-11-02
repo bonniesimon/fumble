@@ -57,7 +57,6 @@ const Files = () => {
             <div className="space-y-5 w-full flex flex-col justify-between items-center">
                <div className="">
                   <img
-                     className="image w-[1280] h-[720]"
                      key={images[currentImageIndex]}
                      src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
                   />
@@ -87,9 +86,9 @@ const Files = () => {
                {deletionInProgress && <p>Deleting files....</p>}
             </div>
          )}
-         <footer className="mt-12 mb-4 w-full flex flex-col justify-center space-y-5">
-            <p className="w-fit mx-auto">Current folder: {searchParams.get("path")}</p>
-            <Link className="button accent mx-auto" to={routes.index}>
+         <footer className="sticky top-full mt-12 mb-4 w-full flex flex-col justify-center space-y-5">
+            <p className="w-fit mx-auto text-sm">Current folder: {searchParams.get("path")}</p>
+            <Link className="button accent mx-auto text-sm px-3 py-1 font-normal" to={routes.index}>
                Open another directory
             </Link>
          </footer>
