@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .button {
+    @apply px-4 py-2 rounded-full font-semibold transition duration-300;
+    @apply bg-savoy-blue-500 text-anti-flash-white;
+
+    &:hover {
+      @apply bg-violet-blue-500;
+    }
+
+    &.delete {
+      @apply bg-poppy-500;
+
+      &:hover {
+        @apply bg-persian-red-500;
+      }
+    }
+
+    &.accept {
+      @apply bg-emerald-500;
+
+      &:hover {
+        @apply bg-pigment-green-500;
+      }
+    }
+
+    &.accent {
+      @apply bg-lavender text-savoy-blue-500;
+
+      &:hover {
+        @apply bg-savoy-blue-300 text-savoy-blue-500;
+      }
+    }
+  }
+}

@@ -15,8 +15,10 @@ const OpenDialog = () => {
 
    return (
       <>
-         <div className="w-full flex justify-center">
-            <button onClick={openDialog}>Open directory</button>
+         <div className="w-full flex flex-col justify-center items-center h-screen">
+            <button className="button" onClick={openDialog}>
+               Open directory
+            </button>
          </div>
          {isShowNoticeToast && (
             <Toast
