@@ -11,9 +11,7 @@ const Files = () => {
    const [showFinalScreen, setShowFinalScreen] = useState(false);
 
    const getFilesForPath = async () => {
-      const files = await window.api.getAllImageFileNames(
-         searchParams.get("path")
-      );
+      const files = await window.api.getAllImageFileNames(searchParams.get("path"));
       setImages(files.filter(filename => filename !== ".DS_Store"));
    };
 
@@ -21,10 +19,7 @@ const Files = () => {
 
    const handlePassImage = () => {
       console.log(getFullPath(images[currentImageIndex]));
-      setFilesToBeDeleted(prev => [
-         ...prev,
-         getFullPath(images[currentImageIndex]),
-      ]);
+      setFilesToBeDeleted(prev => [...prev, getFullPath(images[currentImageIndex])]);
       advance();
    };
 
@@ -50,21 +45,19 @@ const Files = () => {
       <>
          <Link to={routes.index}>Open another directory</Link>
          <div>{searchParams.get("path")}</div>
-         {images.length > 0 &&
-            currentImageIndex < images.length &&
-            !showFinalScreen && (
-               <>
-                  <img
-                     className="image"
-                     key={images[currentImageIndex]}
-                     src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
-                  />
-                  <div className="flex flex-row justify-between">
-                     <button onClick={handlePassImage}>Pass</button>
-                     <button onClick={handleSmashImage}>Smash</button>
-                  </div>
-               </>
-            )}
+         {images.length > 0 && currentImageIndex < images.length && !showFinalScreen && (
+            <>
+               <img
+                  className="image"
+                  key={images[currentImageIndex]}
+                  src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
+               />
+               <div className="flex flex-row justify-between">
+                  <button onClick={handlePassImage}>Pass</button>
+                  <button onClick={handleSmashImage}>Smash</button>
+               </div>
+            </>
+         )}
          {showFinalScreen && (
             <div className="flex flex-col">
                <p>Files to be deleted:</p>

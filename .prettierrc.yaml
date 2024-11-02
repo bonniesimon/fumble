@@ -1,7 +1,7 @@
 tailwindConfig: "./tailwind.config.js"
 trailingComma: "es5"
 arrowParens: "avoid"
-printWidth: 81
+printWidth: 100
 tabWidth: 3
 useTabs: false
 semi: true
