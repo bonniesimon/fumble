@@ -20,6 +20,6 @@ const getAllImageFileNames = async (_, path) => {
    return imageFiles;
 };
 
-const bulkDeleteFiles = filePaths => Promise.all(filePaths.map(path => unlink(path)));
+const bulkDeleteFiles = (_, filePaths) => Promise.all(filePaths.map(path => unlink(path)));
 
 export { handleFileOpen, getAllImageFileNames, bulkDeleteFiles };

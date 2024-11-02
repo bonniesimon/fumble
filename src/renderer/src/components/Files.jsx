@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import routes from "../constants/routes";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 
@@ -9,6 +9,9 @@ const Files = () => {
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
    const [filesToBeDeleted, setFilesToBeDeleted] = useState([]);
    const [showFinalScreen, setShowFinalScreen] = useState(false);
+   const [deletionInProgress, setDeletionInProgress] = useState(false);
+
+   const navigate = useNavigate();
 
    const getFilesForPath = async () => {
       const files = await window.api.getAllImageFileNames(searchParams.get("path"));
@@ -34,6 +37,13 @@ const Files = () => {
    };
 
    const isLastImage = () => currentImageIndex < images.length - 1;
+
+   const handleBulkDeletion = async () => {
+      setDeletionInProgress(true);
+      await window.api.bulkDeleteFiles(filesToBeDeleted);
+      setDeletionInProgress(false);
+      navigate(routes.index);
+   };
 
    useEffect(() => {
       if (searchParams.get("path") === "") return undefined;
@@ -64,6 +74,11 @@ const Files = () => {
                {filesToBeDeleted.map(filename => (
                   <li key={filename}>{filename}</li>
                ))}
+               <div className="flex flex-col justify-center">
+                  <p>Are you sure you want to delete all the above images?</p>
+                  <button onClick={handleBulkDeletion}>Confirm deletion</button>
+               </div>
+               {deletionInProgress && <p>Deleting files....</p>}
             </div>
          )}
       </>

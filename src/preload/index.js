@@ -5,6 +5,7 @@ import { electronAPI } from "@electron-toolkit/preload";
 const api = {
    openFile: () => ipcRenderer.invoke("dialog:openFile"),
    getAllImageFileNames: path => ipcRenderer.invoke("file:getAllImageFileNames", path),
+   bulkDeleteFiles: filePaths => ipcRenderer.invoke("file:bulkDeleteFiles", filePaths),
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to
