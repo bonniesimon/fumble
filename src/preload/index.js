@@ -6,6 +6,7 @@ const api = {
    openFile: () => ipcRenderer.invoke("dialog:openFile"),
    getAllImageFileNames: path => ipcRenderer.invoke("file:getAllImageFileNames", path),
    bulkDeleteFiles: filePaths => ipcRenderer.invoke("file:bulkDeleteFiles", filePaths),
+   fakeBulkDeleteFiles: () => ipcRenderer.invoke("file:fakeBulkDeleteFiles"),
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to

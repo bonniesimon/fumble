@@ -5,7 +5,7 @@ import icon from "../../resources/icon.png?asset";
 import { registerRoute } from "../lib/electron-router-dom";
 import { protocol } from "electron";
 
-import { bulkDeleteFiles, getAllImageFileNames, handleFileOpen } from "./file";
+import { bulkDeleteFiles, fakeBulkDeleteFiles, getAllImageFileNames, handleFileOpen } from "./file";
 import { FILE_PROTOCOL } from "../shared/fileProtocol";
 
 function createWindow() {
@@ -53,6 +53,7 @@ const IPC_HANDLERS = {
    "dialog:openFile": handleFileOpen,
    "file:getAllImageFileNames": getAllImageFileNames,
    "file:bulkDeleteFiles": bulkDeleteFiles,
+   "file:fakeBulkDeleteFiles": fakeBulkDeleteFiles,
 };
 
 // This method will be called when Electron has finished

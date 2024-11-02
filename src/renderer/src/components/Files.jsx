@@ -40,7 +40,7 @@ const Files = () => {
 
    const handleBulkDeletion = async () => {
       setDeletionInProgress(true);
-      await window.api.bulkDeleteFiles(filesToBeDeleted);
+      await window.api.fakeBulkDeleteFiles(filesToBeDeleted);
       setDeletionInProgress(false);
       navigate(routes.index);
    };
