@@ -56,7 +56,7 @@ const Files = () => {
       <div className="w-full h-screen px-5 py-5 flex flex-col justify-center items-center">
          {images.length > 0 && currentImageIndex < images.length && !showFinalScreen && (
             <div className="space-y-5 w-full flex flex-col justify-between items-center">
-               <div className="w-[400px] h-[225px] md:w-[640px] md:h-[360px] lg:w-[768px] lg:h-[432px] 2xl:w-[1280px] 2xl:h-[720px] bg-gray-100 relative">
+               <div className="w-[400px] h-[225px] md:w-[640px] md:h-[360px] lg:w-[768px] lg:h-[432px] relative">
                   <img
                      key={images[currentImageIndex]}
                      src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
