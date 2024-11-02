@@ -16,6 +16,7 @@ module.exports = {
             800: "#12161d",
             900: "#090b0e",
          },
+         lavender: "#EDE9FE",
          "savoy-blue": {
             DEFAULT: "#5f65d4",
             100: "#dfe0f6",
