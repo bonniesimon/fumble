@@ -4,13 +4,13 @@ import routes from "../constants/routes";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 
 const Files = () => {
-   const [searchParams] = useSearchParams();
    const [images, setImages] = useState([]);
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
    const [filesToBeDeleted, setFilesToBeDeleted] = useState([]);
    const [showFinalScreen, setShowFinalScreen] = useState(false);
    const [deletionInProgress, setDeletionInProgress] = useState(false);
 
+   const [searchParams] = useSearchParams();
    const navigate = useNavigate();
 
    const getFilesForPath = async () => {
@@ -42,7 +42,7 @@ const Files = () => {
       setDeletionInProgress(true);
       await window.api.fakeBulkDeleteFiles(filesToBeDeleted);
       setDeletionInProgress(false);
-      navigate(routes.index);
+      navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
    };
 
    useEffect(() => {

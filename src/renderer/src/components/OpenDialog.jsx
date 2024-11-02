@@ -1,17 +1,30 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Toast from "./Toast";
 
 const OpenDialog = () => {
    const navigate = useNavigate();
+   const [searchParams, setSearchParams] = useSearchParams();
 
    const openDialog = async () => {
       const path = await window.api.openFile();
       navigate(`/files?path=${encodeURIComponent(path)}`);
    };
 
+   const isShowNoticeToast = searchParams.get("notice") && searchParams.get("notice") !== "";
+   console.log({ isShowNoticeToast, notice: searchParams.get("notice") });
+
    return (
-      <div className="action">
-         <button onClick={openDialog}>Open directory</button>
-      </div>
+      <>
+         <div className="w-full flex justify-center">
+            <button onClick={openDialog}>Open directory</button>
+         </div>
+         {isShowNoticeToast && (
+            <Toast
+               message={searchParams.get("notice")}
+               onClose={() => setSearchParams(curr => curr.delete("notice"))}
+            />
+         )}
+      </>
    );
 };
 
