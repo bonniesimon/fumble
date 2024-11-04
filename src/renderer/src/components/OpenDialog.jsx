@@ -22,6 +22,7 @@ const OpenDialog = () => {
          </div>
          {isShowNoticeToast && (
             <Toast
+               status={searchParams.get("notice-kind") || "success"}
                message={searchParams.get("notice")}
                onClose={() => setSearchParams(curr => curr.delete("notice"))}
             />

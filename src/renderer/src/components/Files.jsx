@@ -4,6 +4,7 @@ import routes from "../constants/routes";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import ProgressBar from "./ProgressBar";
 import Breadcrumbs from "./Breadcrumbs";
+import FinalScreen from "./FinalScreen";
 
 const Files = () => {
    const [images, setImages] = useState([]);
@@ -83,6 +84,9 @@ const Files = () => {
                </div>
             )}
             {showFinalScreen && (
+               <FinalScreen {...{ filesToBeDeleted, handleBulkDeletion, deletionInProgress }} />
+            )}
+            {showFinalScreen && false && (
                <div className="flex flex-col">
                   <p>Files to be deleted:</p>
                   {filesToBeDeleted.map(filename => (
