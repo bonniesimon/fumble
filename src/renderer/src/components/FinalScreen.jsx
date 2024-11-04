@@ -1,10 +1,21 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Spinner from "./Spinner";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
-import { useNavigate } from "react-router-dom";
 import routes from "../constants/routes";
 
-const FinalScreen = ({ filesToBeDeleted, handleBulkDeletion, deletionInProgress }) => {
+const FinalScreen = ({ filesToBeDeleted }) => {
+   const [deletionInProgress, setDeletionInProgress] = useState(false);
+
    const navigate = useNavigate();
+
+   const handleBulkDeletion = async () => {
+      setDeletionInProgress(true);
+      await window.api.fakeBulkDeleteFiles(filesToBeDeleted);
+      setDeletionInProgress(false);
+      navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
+   };
 
    return (
       <div className="flex flex-col justify-center w-7/12 mx-auto space-y-14 h-full">

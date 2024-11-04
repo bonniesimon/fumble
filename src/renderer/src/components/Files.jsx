@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import routes from "../constants/routes";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import ProgressBar from "./ProgressBar";
@@ -11,10 +11,8 @@ const Files = () => {
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
    const [filesToBeDeleted, setFilesToBeDeleted] = useState([]);
    const [showFinalScreen, setShowFinalScreen] = useState(false);
-   const [deletionInProgress, setDeletionInProgress] = useState(false);
 
    const [searchParams] = useSearchParams();
-   const navigate = useNavigate();
 
    const getFilesForPath = async () => {
       const files = await window.api.getAllImageFileNames(searchParams.get("path"));
@@ -40,13 +38,6 @@ const Files = () => {
    };
 
    const isLastImage = () => currentImageIndex < images.length - 1;
-
-   const handleBulkDeletion = async () => {
-      setDeletionInProgress(true);
-      await window.api.fakeBulkDeleteFiles(filesToBeDeleted);
-      setDeletionInProgress(false);
-      navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
-   };
 
    useEffect(() => {
       if (searchParams.get("path") === "") return undefined;
@@ -83,24 +74,7 @@ const Files = () => {
                   <ProgressBar current={currentImageIndex} total={images.length} />
                </div>
             )}
-            {showFinalScreen && (
-               <FinalScreen {...{ filesToBeDeleted, handleBulkDeletion, deletionInProgress }} />
-            )}
-            {showFinalScreen && false && (
-               <div className="flex flex-col">
-                  <p>Files to be deleted:</p>
-                  {filesToBeDeleted.map(filename => (
-                     <li key={filename}>{filename}</li>
-                  ))}
-                  <div className="flex flex-col justify-center mt-12 space-y-5">
-                     <p>Are you sure you want to delete all the above images?</p>
-                     <button className="button success w-fit mx-auto" onClick={handleBulkDeletion}>
-                        Confirm deletion
-                     </button>
-                  </div>
-                  {deletionInProgress && <p>Deleting files....</p>}
-               </div>
-            )}
+            {showFinalScreen && <FinalScreen {...{ filesToBeDeleted }} />}
          </div>
       </div>
    );
