@@ -17,7 +17,23 @@ const getAllImageFileNames = async (_, path) => {
       [".jpg", ".jpeg", ".png", ".gif"].includes(extname(file).toLowerCase())
    );
 
-   return imageFiles;
+   // TODO: Handle cases where the filepath has spaces
+   // TODO: Add check to do this only for macOS
+   const filteredImageFilesForMac = imageFiles.filter(filename => {
+      // Filter out files starting with "._" (macOS metadata files)
+      if (filename.startsWith("._")) return false;
+
+      // Filter out .DS_Store files
+      if (filename === ".DS_Store") return false;
+
+      // Filter out other common macOS system files
+      const macSystemFiles = [".localized", ".Spotlight-V100", ".Trashes", "__MACOSX"];
+      if (macSystemFiles.includes(filename)) return false;
+
+      return true;
+   });
+
+   return filteredImageFilesForMac;
 };
 
 const bulkDeleteFiles = (_, filePaths) => Promise.all(filePaths.map(path => unlink(path)));
