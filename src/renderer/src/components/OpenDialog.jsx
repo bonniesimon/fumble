@@ -11,7 +11,6 @@ const OpenDialog = () => {
    };
 
    const isShowNoticeToast = searchParams.get("notice") && searchParams.get("notice") !== "";
-   console.log({ isShowNoticeToast, notice: searchParams.get("notice") });
 
    return (
       <>

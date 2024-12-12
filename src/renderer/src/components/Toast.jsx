@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const COLOR_STATUS_MAP = {
    success: "bg-emerald",
    error: "bg-persian-red-500",
+   warning: "bg-amber-400",
 };
 
 const Toast = ({ message, onClose, status = "success" }) => {

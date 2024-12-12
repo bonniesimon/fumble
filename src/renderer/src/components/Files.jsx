@@ -72,6 +72,12 @@ const Files = () => {
                      </button>
                   </div>
                   <ProgressBar current={currentImageIndex} total={images.length} />
+                  <button
+                     className="button accent my-8 px-8 py-3"
+                     onClick={() => setShowFinalScreen(true)}
+                  >
+                     Finish
+                  </button>
                </div>
             )}
             {showFinalScreen && <FinalScreen {...{ filesToBeDeleted }} />}

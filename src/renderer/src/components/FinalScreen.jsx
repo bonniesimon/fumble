@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Spinner from "./Spinner";
@@ -16,6 +16,15 @@ const FinalScreen = ({ filesToBeDeleted }) => {
       setDeletionInProgress(false);
       navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
    };
+
+   useEffect(() => {
+      if (filesToBeDeleted.length > 0) return;
+
+      navigate(
+         routes.index +
+            `?notice=${encodeURIComponent("No files selected to be deleted")}&notice-kind=warning`
+      );
+   }, [filesToBeDeleted]);
 
    return (
       <div className="flex flex-col justify-center w-7/12 mx-auto space-y-14 h-full">
