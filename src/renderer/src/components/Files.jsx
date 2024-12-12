@@ -5,6 +5,8 @@ import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import ProgressBar from "./ProgressBar";
 import Breadcrumbs from "./Breadcrumbs";
 import FinalScreen from "./FinalScreen";
+import classNames from "classnames";
+import UndoIcon from "./Icons/UndoIcon";
 
 const Files = () => {
    const [images, setImages] = useState([]);
@@ -22,12 +24,19 @@ const Files = () => {
    const getFullPath = filename => `${searchParams.get("path")}/${filename}`;
 
    const handlePassImage = () => {
-      console.log(getFullPath(images[currentImageIndex]));
+      console.info(getFullPath(images[currentImageIndex]));
       setFilesToBeDeleted(prev => [...prev, getFullPath(images[currentImageIndex])]);
       advance();
    };
 
    const handleSmashImage = () => advance();
+
+   const handleUndo = () => {
+      if (currentImageIndex === 0) return;
+
+      setFilesToBeDeleted(prev => prev.slice(0, filesToBeDeleted.length - 1));
+      setCurrentImageIndex(prev => prev - 1);
+   };
 
    const advance = () => {
       if (isLastImage()) {
@@ -66,6 +75,14 @@ const Files = () => {
                   <div className="flex flex-row justify-between w-6/12 lg:w-4/12">
                      <button className="button danger px-12 py-4" onClick={handlePassImage}>
                         Delete
+                     </button>
+                     <button
+                        className={classNames("px-8 py-2", {
+                           hidden: currentImageIndex == 0,
+                        })}
+                        onClick={handleUndo}
+                     >
+                        <UndoIcon className="ml-3" />
                      </button>
                      <button className="button success px-12 py-4" onClick={handleSmashImage}>
                         keep
