@@ -7,23 +7,49 @@ import routes from "../constants/routes";
 
 const FinalScreen = ({ filesToBeDeleted }) => {
    const [deletionInProgress, setDeletionInProgress] = useState(false);
+   const [unselectedImages, setUnselectedImages] = useState([]);
 
    const navigate = useNavigate();
 
    const handleBulkDeletion = async () => {
       setDeletionInProgress(true);
-      await window.api.fakeBulkDeleteFiles(filesToBeDeleted);
+
+      const actualFilesToBeDeleted = filesToBeDeleted.filter(
+         file => !unselectedImages.includes(file)
+      );
+
+      if (actualFilesToBeDeleted.length === 0) {
+         return handleNoFilesToBeDeleted();
+      }
+
+      await window.api.fakeBulkDeleteFiles(actualFilesToBeDeleted);
+
       setDeletionInProgress(false);
+
       navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
+   };
+
+   const handleCheckboxChange = (e, imagePath) => {
+      if (e.target.checked) {
+         setUnselectedImages(prev => prev.filter(imgPath => imgPath !== imagePath));
+
+         return;
+      }
+
+      setUnselectedImages(prev => [...prev, imagePath]);
+   };
+
+   const handleNoFilesToBeDeleted = () => {
+      navigate(
+         routes.index +
+            `?notice=${encodeURIComponent("No files selected to be deleted")}&notice-kind=warning`
+      );
    };
 
    useEffect(() => {
       if (filesToBeDeleted.length > 0) return;
 
-      navigate(
-         routes.index +
-            `?notice=${encodeURIComponent("No files selected to be deleted")}&notice-kind=warning`
-      );
+      handleNoFilesToBeDeleted();
    }, [filesToBeDeleted]);
 
    return (
@@ -39,6 +65,11 @@ const FinalScreen = ({ filesToBeDeleted }) => {
             )}
             {filesToBeDeleted.map(image => (
                <div key={image} className="h-[96px] mx-2 my-2">
+                  <input
+                     type="checkbox"
+                     checked={!unselectedImages.includes(image)}
+                     onChange={e => handleCheckboxChange(e, image)}
+                  />
                   <img
                      src={`${FILE_PROTOCOL}:///${image}`}
                      className="w-full h-full object-contain"
