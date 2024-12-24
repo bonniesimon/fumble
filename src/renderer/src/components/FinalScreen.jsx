@@ -47,7 +47,7 @@ const FinalScreen = ({ filesToBeDeleted }) => {
          <p className="text-lg font-semibold text-center">Select the images you want to delete</p>
          <div className="overflow-y-auto grid grid-cols-3 gap-4 max-h-96 relative p-4">
             {deletionInProgress && (
-               <div className="fixed inset-0 flex items-center justify-center bg-black/40">
+               <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
                   <Spinner size="lg" />
                </div>
             )}
