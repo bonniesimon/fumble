@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import Spinner from "./Spinner";
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import routes from "../constants/routes";
+import classNames from "classnames";
 
 const FinalScreen = ({ filesToBeDeleted }) => {
    const [deletionInProgress, setDeletionInProgress] = useState(false);
@@ -53,13 +54,13 @@ const FinalScreen = ({ filesToBeDeleted }) => {
             {filesToBeDeleted.map(image => (
                <div
                   key={image}
-                  // TODO: use classnames
-                  className={`relative group cursor-pointer rounded-lg overflow-hidden transition-all duration-200
-                     ${
-                        unselectedImages.includes(image)
-                           ? "opacity-40 hover:opacity-60"
-                           : "ring-2 ring-blue-500 ring-offset-2"
-                     }`}
+                  className={classNames(
+                     "relative group cursor-pointer rounded-lg overflow-hidden transition-all duration-200",
+                     {
+                        "opacity-40 hover:opacity-60": unselectedImages.includes(image),
+                        "ring-2 ring-blue-500 ring-offset-2": !unselectedImages.includes(image),
+                     }
+                  )}
                   onClick={() => toggleImageSelection(image)}
                >
                   <img
