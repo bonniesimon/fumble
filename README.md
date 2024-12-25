@@ -5,7 +5,7 @@
 
 Bumble but for your files
 
-![Kapture 2024-12-25 at 12 00 26](https://github.com/user-attachments/assets/e37de44b-428c-4c6d-9b93-f4b2d13709bb)
+![Kapture 2024-12-25 at 12 00 26](https://github.com/user-attachments/assets/a0c4ed5c-7834-468b-98da-4dcc19b3a96c)
 
 
 ## Project Setup
