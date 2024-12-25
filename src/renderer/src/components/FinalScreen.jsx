@@ -85,7 +85,7 @@ const FinalScreen = ({ filesToBeDeleted }) => {
                onClick={() =>
                   navigate(
                      routes.index +
-                        `?notice=${encodeURIComponent("Aborted deletion")}&notice-kind=error`
+                        `?notice=${encodeURIComponent("Deletion cancelled")}&notice-kind=error`
                   )
                }
             >

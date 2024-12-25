@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { X } from "lucide-react";
 
 const COLOR_STATUS_MAP = {
    success: "bg-emerald",
@@ -26,12 +27,10 @@ const Toast = ({ message, onClose, status = "success" }) => {
          }`}
       >
          <div
-            className={`flex flex-row text-white py-2 px-4 space-x-5 ${COLOR_STATUS_MAP[status]} text-raisin-black-500 rounded-lg`}
+            className={`flex flex-row text-white py-2 px-4 space-x-3 ${COLOR_STATUS_MAP[status]} text-raisin-black-500 rounded-lg`}
          >
             <p>{message}</p>
-            <button className="hover:text-poppy" onClick={onClose}>
-               X
-            </button>
+            <X className="hover:text-poppy" onClick={onClose} />
          </div>
       </div>
    );
