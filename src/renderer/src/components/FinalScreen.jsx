@@ -19,7 +19,7 @@ const FinalScreen = ({ filesToBeDeleted }) => {
       if (actualFilesToBeDeleted.length === 0) {
          return handleNoFilesToBeDeleted();
       }
-      await window.api.fakeBulkDeleteFiles(actualFilesToBeDeleted);
+      await window.api.bulkDeleteFiles(actualFilesToBeDeleted);
       setDeletionInProgress(false);
       navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
    };
