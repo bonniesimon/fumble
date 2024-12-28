@@ -1,10 +1,10 @@
 {
    "name": "fumble",
    "version": "0.1.0",
-   "description": "An Electron application with React",
+   "description": "Interactively Delete Images",
    "main": "./out/main/index.js",
-   "author": "example.com",
-   "homepage": "https://electron-vite.org",
+   "author": "bonniesimon",
+   "homepage": "https://github.com/bonniesimon/fumble",
    "scripts": {
       "format": "prettier --write .",
       "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
