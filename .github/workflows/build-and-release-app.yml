@@ -37,8 +37,12 @@ jobs:
 
          - name: Create Git Tag
            run: |
+              git config user.name "GitHub Actions Bot"
+              git config user.email "actions@github.com"
               git tag v${{ steps.get-version.outputs.version }}
               git push origin v${{ steps.get-version.outputs.version }}
+           env:
+              GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
          - name: Create Release
            id: create_release
