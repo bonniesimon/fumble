@@ -1,4 +1,5 @@
 module.exports = {
+   plugins: ["perfectionist"],
    extends: [
       "eslint:recommended",
       "plugin:react/recommended",
@@ -8,5 +9,12 @@ module.exports = {
    ],
    rules: {
       "react/prop-types": 0,
+      "perfectionist/sort-imports": [
+         "error",
+         {
+            type: "natural",
+            order: "asc",
+         },
+      ],
    },
 };
