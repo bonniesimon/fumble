@@ -3,85 +3,11 @@
    <head>
       <title>Fumble - Declutter Your Images</title>
       <script src="https://cdn.tailwindcss.com"></script>
-      <style>
-         /* Fade in animation */
-         @keyframes fadeIn {
-            from {
-               opacity: 0;
-               transform: translateY(20px);
-            }
-            to {
-               opacity: 1;
-               transform: translateY(0);
-            }
-         }
-
-         /* Floating animation */
-         @keyframes float {
-            0% {
-               transform: translateY(0px);
-            }
-            50% {
-               transform: translateY(-10px);
-            }
-            100% {
-               transform: translateY(0px);
-            }
-         }
-
-         /* Pulse animation */
-         @keyframes pulse {
-            0% {
-               transform: scale(1);
-            }
-            50% {
-               transform: scale(1.05);
-            }
-            100% {
-               transform: scale(1);
-            }
-         }
-
-         .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
-         }
-
-         .animate-float {
-            animation: float 3s ease-in-out infinite;
-         }
-
-         .animate-pulse-slow {
-            animation: pulse 3s ease-in-out infinite;
-         }
-
-         /* Staggered fade in for features */
-         .feature-item:nth-child(1) {
-            animation-delay: 0.2s;
-         }
-         .feature-item:nth-child(2) {
-            animation-delay: 0.4s;
-         }
-         .feature-item:nth-child(3) {
-            animation-delay: 0.6s;
-         }
-
-         /* Hover effects */
-         .hover-grow {
-            transition: transform 0.2s ease;
-         }
-         .hover-grow:hover {
-            transform: scale(1.05);
-         }
-
-         /* Smooth scroll behavior */
-         html {
-            scroll-behavior: smooth;
-         }
-      </style>
+      <style src="styles.css"></style>
    </head>
    <body class="bg-[#1A1E29] text-white">
       <!-- Hero Section -->
-      <header class="relative overflow-hidden gradient-bg">
+      <main class="relative overflow-hidden gradient-bg">
          <div class="absolute inset-0 hero-pattern"></div>
          <div class="container mx-auto px-4 min-h-screen flex items-center relative">
             <div class="grid md:grid-cols-2 gap-12 items-center py-16">
@@ -165,7 +91,7 @@
                <div class="relative animate-fade-in">
                   <div class="relative z-10 animate-float">
                      <img
-                        src="interface.png"
+                        src="assets/interface.png"
                         alt="Fumble Interface"
                         class="rounded-2xl shadow-2xl"
                      />
@@ -214,13 +140,17 @@
                </div>
             </div>
          </div>
-      </header>
+      </main>
 
       <!-- Feature Section -->
       <section id="features" class="container mx-auto px-4 py-16">
          <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="hover-grow">
-               <img src="final-screen.png" alt="Fumble Interface" class="rounded-lg shadow-2xl" />
+               <img
+                  src="assets/final-screen.png"
+                  alt="Fumble Interface"
+                  class="rounded-lg shadow-2xl"
+               />
             </div>
             <div>
                <h2 class="text-4xl font-bold text-[#5BD589] mb-6 animate-fade-in">

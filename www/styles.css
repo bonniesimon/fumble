@@ -1,0 +1,73 @@
+/* Fade in animation */
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+      transform: translateY(20px);
+   }
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+/* Floating animation */
+@keyframes float {
+   0% {
+      transform: translateY(0px);
+   }
+   50% {
+      transform: translateY(-10px);
+   }
+   100% {
+      transform: translateY(0px);
+   }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+   0% {
+      transform: scale(1);
+   }
+   50% {
+      transform: scale(1.05);
+   }
+   100% {
+      transform: scale(1);
+   }
+}
+
+.animate-fade-in {
+   animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-float {
+   animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+   animation: pulse 3s ease-in-out infinite;
+}
+
+/* Staggered fade in for features */
+.feature-item:nth-child(1) {
+   animation-delay: 0.2s;
+}
+.feature-item:nth-child(2) {
+   animation-delay: 0.4s;
+}
+.feature-item:nth-child(3) {
+   animation-delay: 0.6s;
+}
+
+/* Hover effects */
+.hover-grow {
+   transition: transform 0.2s ease;
+}
+.hover-grow:hover {
+   transform: scale(1.05);
+}
+
+/* Smooth scroll behavior */
+html {
+   scroll-behavior: smooth;
+}
