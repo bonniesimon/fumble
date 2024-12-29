@@ -69,7 +69,7 @@ const Files = () => {
                      <img
                         key={images[currentImageIndex]}
                         src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
-                        className="absolute w-full h-full object-cover"
+                        className="absolute w-full h-full object-contain"
                      />
                   </div>
                   <div className="flex flex-row justify-between w-6/12 lg:w-4/12">
