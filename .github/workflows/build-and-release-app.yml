@@ -4,8 +4,6 @@ on:
    push:
       branches:
          - main
-      paths:
-         - "package.json" # Trigger only when package.json is modified
 
 jobs:
    release:
