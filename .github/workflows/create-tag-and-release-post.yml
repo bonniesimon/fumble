@@ -1,0 +1,37 @@
+name: Create tag and release in github
+
+on:
+   push:
+      branches:
+         - main
+
+jobs:
+   release:
+      permissions:
+         contents: write
+      # Run only if commit message contains [bump-version]
+      if: contains(github.event.head_commit.message, '[bump-version]')
+      runs-on: macos-latest
+
+      steps:
+         - name: Get version from package.json
+           id: get-version
+           run: |
+              VERSION=$(node -p "require('./package.json').version")
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+         - name: Create Git Tag
+           run: |
+              git tag v${{ steps.get-version.outputs.version }}
+              git push origin v${{ steps.get-version.outputs.version }}
+
+         - name: Create Release
+           id: create_release
+           uses: actions/create-release@v1
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+              tag_name: v${{ steps.get-version.outputs.version }}
+              release_name: Release v${{ steps.get-version.outputs.version }}
+              draft: false
+              prerelease: false
