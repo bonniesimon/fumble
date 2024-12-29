@@ -2,12 +2,11 @@
 name: Deploy static content to Pages
 
 on:
-   # Runs on pushes targeting the default branch
    push:
       branches: ["main"]
-
-   # Allows you to run this workflow manually from the Actions tab
-   workflow_dispatch:
+      paths:
+         - "www/**" # This makes the action run only when files in www directory change
+   workflow_dispatch: # Keeping this to allow manual triggers
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
