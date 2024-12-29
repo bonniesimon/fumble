@@ -1,10 +1,11 @@
+import classNames from "classnames";
+import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { X } from "lucide-react";
-import Spinner from "./Spinner";
+
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import routes from "../constants/routes";
-import classNames from "classnames";
+import Spinner from "./Spinner";
 
 const FinalScreen = ({ filesToBeDeleted }) => {
    const [deletionInProgress, setDeletionInProgress] = useState(false);

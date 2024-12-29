@@ -1,12 +1,12 @@
-import { app, shell, BrowserWindow, ipcMain } from "electron";
-import { join } from "path";
 import { electronApp, optimizer } from "@electron-toolkit/utils";
+import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { protocol } from "electron";
+import { join } from "path";
+
 import icon from "../../resources/icon.png?asset";
 import { registerRoute } from "../lib/electron-router-dom";
-import { protocol } from "electron";
-
-import { bulkDeleteFiles, fakeBulkDeleteFiles, getAllImageFileNames, handleFileOpen } from "./file";
 import { FILE_PROTOCOL } from "../shared/fileProtocol";
+import { bulkDeleteFiles, fakeBulkDeleteFiles, getAllImageFileNames, handleFileOpen } from "./file";
 
 function createWindow() {
    // Create the browser window.

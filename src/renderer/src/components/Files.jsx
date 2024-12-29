@@ -1,12 +1,13 @@
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import routes from "../constants/routes";
+
 import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
-import ProgressBar from "./ProgressBar";
+import routes from "../constants/routes";
 import Breadcrumbs from "./Breadcrumbs";
 import FinalScreen from "./FinalScreen";
-import classNames from "classnames";
 import UndoIcon from "./Icons/UndoIcon";
+import ProgressBar from "./ProgressBar";
 
 const Files = () => {
    const [images, setImages] = useState([]);

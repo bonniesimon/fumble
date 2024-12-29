@@ -1,8 +1,9 @@
-import OpenDialog from "./components/OpenDialog";
 import { Route } from "react-router-dom";
-import routes from "./constants/routes";
-import Files from "./components/Files";
+
 import { Router } from "../../lib/electron-router-dom";
+import Files from "./components/Files";
+import OpenDialog from "./components/OpenDialog";
+import routes from "./constants/routes";
 
 const App = () => {
    return (
