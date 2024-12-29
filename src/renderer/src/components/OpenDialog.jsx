@@ -1,5 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Toast from "./Toast";
+import routes from "../constants/routes";
 
 const OpenDialog = () => {
    const navigate = useNavigate();
@@ -7,6 +8,10 @@ const OpenDialog = () => {
 
    const openDialog = async () => {
       const path = await window.api.openFile();
+      if (path === undefined) {
+         return navigate(routes.index);
+      }
+
       navigate(`/files?path=${encodeURIComponent(path)}`);
    };
 
