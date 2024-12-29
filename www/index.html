@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+   <head>
+      <title>Fumble - Declutter Your Images</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <style>
+         /* Fade in animation */
+         @keyframes fadeIn {
+            from {
+               opacity: 0;
+               transform: translateY(20px);
+            }
+            to {
+               opacity: 1;
+               transform: translateY(0);
+            }
+         }
+
+         /* Floating animation */
+         @keyframes float {
+            0% {
+               transform: translateY(0px);
+            }
+            50% {
+               transform: translateY(-10px);
+            }
+            100% {
+               transform: translateY(0px);
+            }
+         }
+
+         /* Pulse animation */
+         @keyframes pulse {
+            0% {
+               transform: scale(1);
+            }
+            50% {
+               transform: scale(1.05);
+            }
+            100% {
+               transform: scale(1);
+            }
+         }
+
+         .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+         }
+
+         .animate-float {
+            animation: float 3s ease-in-out infinite;
+         }
+
+         .animate-pulse-slow {
+            animation: pulse 3s ease-in-out infinite;
+         }
+
+         /* Staggered fade in for features */
+         .feature-item:nth-child(1) {
+            animation-delay: 0.2s;
+         }
+         .feature-item:nth-child(2) {
+            animation-delay: 0.4s;
+         }
+         .feature-item:nth-child(3) {
+            animation-delay: 0.6s;
+         }
+
+         /* Hover effects */
+         .hover-grow {
+            transition: transform 0.2s ease;
+         }
+         .hover-grow:hover {
+            transform: scale(1.05);
+         }
+
+         /* Smooth scroll behavior */
+         html {
+            scroll-behavior: smooth;
+         }
+      </style>
+   </head>
+   <body class="bg-[#1A1E29] text-white">
+      <!-- Hero Section -->
+      <header class="container mx-auto px-4 py-16 animate-fade-in">
+         <div class="text-center">
+            <h1 class="text-6xl font-bold text-[#5BD589] mb-4 animate-float">Fumble</h1>
+            <p class="text-2xl text-[#EDE9FE] mb-8">Declutter your images with a swipe</p>
+            <button
+               class="bg-[#5BD589] text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-all hover-grow animate-pulse-slow"
+            >
+               Download Now
+            </button>
+         </div>
+      </header>
+
+      <!-- Feature Section -->
+      <section class="container mx-auto px-4 py-16">
+         <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="hover-grow">
+               <img src="interface.png" alt="Fumble Interface" class="rounded-lg shadow-2xl" />
+            </div>
+            <div>
+               <h2 class="text-4xl font-bold text-[#5BD589] mb-6 animate-fade-in">
+                  Declutter Like Never Before
+               </h2>
+               <div class="space-y-4 text-[#EDE9FE]">
+                  <p class="text-lg animate-fade-in">
+                     Say goodbye to messy photo libraries. Fumble brings the familiar swipe
+                     interface to image management.
+                  </p>
+                  <ul class="space-y-3">
+                     <li class="flex items-center feature-item animate-fade-in opacity-0">
+                        <svg
+                           class="w-6 h-6 text-[#5BD589] mr-2"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                        >
+                           <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                           ></path>
+                        </svg>
+                        Simple swipe interface - keep or delete
+                     </li>
+                     <li class="flex items-center feature-item animate-fade-in opacity-0">
+                        <svg
+                           class="w-6 h-6 text-[#5BD589] mr-2"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                        >
+                           <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                           ></path>
+                        </svg>
+                        Bulk delete with preview
+                     </li>
+                     <li class="flex items-center feature-item animate-fade-in opacity-0">
+                        <svg
+                           class="w-6 h-6 text-[#5BD589] mr-2"
+                           fill="none"
+                           stroke="currentColor"
+                           viewBox="0 0 24 24"
+                        >
+                           <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M5 13l4 4L19 7"
+                           ></path>
+                        </svg>
+                        Undo functionality for peace of mind
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- How It Works -->
+      <section class="bg-[#232838] py-16">
+         <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-[#5BD589] mb-12 animate-fade-in">
+               How It Works
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+               <div class="text-center p-6 hover-grow">
+                  <div
+                     class="bg-[#1A1E29] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+                  >
+                     <span class="text-2xl text-[#5BD589]">1</span>
+                  </div>
+                  <h3 class="text-xl font-semibold text-[#5BD589] mb-2">Select Folder</h3>
+                  <p class="text-[#EDE9FE]">
+                     Choose the folder containing images you want to organize
+                  </p>
+               </div>
+               <div class="text-center p-6 hover-grow">
+                  <div
+                     class="bg-[#1A1E29] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+                  >
+                     <span class="text-2xl text-[#5BD589]">2</span>
+                  </div>
+                  <h3 class="text-xl font-semibold text-[#5BD589] mb-2">Swipe Through</h3>
+                  <p class="text-[#EDE9FE]">Keep or delete images with intuitive swipe gestures</p>
+               </div>
+               <div class="text-center p-6 hover-grow">
+                  <div
+                     class="bg-[#1A1E29] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+                  >
+                     <span class="text-2xl text-[#5BD589]">3</span>
+                  </div>
+                  <h3 class="text-xl font-semibold text-[#5BD589] mb-2">Review & Confirm</h3>
+                  <p class="text-[#EDE9FE]">Review your selections before final deletion</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="container mx-auto px-4 py-16 text-center">
+         <h2 class="text-4xl font-bold text-[#5BD589] mb-4 animate-fade-in">Ready to Declutter?</h2>
+         <p class="text-[#EDE9FE] mb-8 text-lg animate-fade-in">
+            Join thousands of users who have simplified their image management
+         </p>
+         <button
+            class="bg-[#5BD589] text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-all hover-grow animate-pulse-slow"
+         >
+            Download Fumble
+         </button>
+      </section>
+
+      <!-- Footer -->
+      <footer class="border-t border-[#232838] py-8">
+         <div class="container mx-auto px-4 text-center text-[#EDE9FE]">
+            <p>&copy; 2024 Fumble. All rights reserved.</p>
+         </div>
+      </footer>
+   </body>
+</html>
