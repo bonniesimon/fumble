@@ -9,7 +9,7 @@
       "format": "prettier --write .",
       "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
       "start": "electron-vite preview",
-      "dev": "electron-vite dev -w",
+      "dev": "ELECTRON_ENV=development electron-vite dev -w",
       "build": "electron-vite build",
       "postinstall": "electron-builder install-app-deps",
       "build:unpack": "yarn build && electron-builder --dir",

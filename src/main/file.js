@@ -36,7 +36,14 @@ const getAllImageFileNames = async (_, path) => {
    return filteredImageFilesForMac;
 };
 
-const bulkDeleteFiles = (_, filePaths) => Promise.all(filePaths.map(path => unlink(path)));
+const bulkDeleteFiles = (_, filePaths) => {
+   if (process.env.ELECTRON_ENV == "development") {
+      console.info("fakeBulkDeleteFiles ran");
+      return fakeBulkDeleteFiles();
+   }
+
+   return Promise.all(filePaths.map(path => unlink(path)));
+};
 
 const fakeBulkDeleteFiles = () =>
    new Promise(resolve => {
