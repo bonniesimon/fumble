@@ -1,5 +1,5 @@
-import { dialog } from "electron/main";
 import { IpcMainInvokeEvent } from "electron";
+import { dialog } from "electron/main";
 import { readdir, unlink } from "fs/promises";
 import { extname } from "path";
 
