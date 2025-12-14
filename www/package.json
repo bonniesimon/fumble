@@ -1,0 +1,11 @@
+{
+  "name": "fumble-landing",
+  "private": true,
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.0",
+    "@tailwindcss/cli": "^4.1.0"
+  }
+}

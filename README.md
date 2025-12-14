@@ -3,7 +3,7 @@
 
 # fumble
 
-Bumble but for your images. Interactively delete images. 
+Bumble but for your images. Interactively delete images.
 
 
 
@@ -27,6 +27,13 @@ $ yarn
 
 ```bash
 $ yarn dev
+```
+
+For building the website in www locally
+```bash
+cd www
+yarn
+yarn build
 ```
 
 ### Build

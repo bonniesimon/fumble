@@ -3,3 +3,6 @@ dist
 out
 .DS_Store
 *.log*
+
+# Generated CSS for landing page (built in CI)
+www/output.css
