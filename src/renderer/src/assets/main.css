@@ -1,38 +1,157 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer components {
-   .button {
-      @apply px-4 py-2 rounded-full font-semibold transition duration-300;
-      @apply bg-savoy-blue-500 text-anti-flash-white;
+@theme {
+  --color-charcoal-100: #cfd5e1;
+  --color-charcoal-200: #9eacc3;
+  --color-charcoal-300: #6e82a4;
+  --color-charcoal-400: #4b5c78;
+  --color-charcoal-500: #2d3748;
+  --color-charcoal-600: #242c3a;
+  --color-charcoal-700: #1b212b;
+  --color-charcoal-800: #12161d;
+  --color-charcoal-900: #090b0e;
+  --color-charcoal: #2d3748;
 
-      &:hover {
-         @apply bg-violet-blue-500;
-      }
+  --color-lavender: #ede9fe;
 
-      &.danger {
-         @apply bg-poppy-500;
+  --color-savoy-blue-100: #dfe0f6;
+  --color-savoy-blue-200: #bfc1ee;
+  --color-savoy-blue-300: #9ea2e5;
+  --color-savoy-blue-400: #7e83dd;
+  --color-savoy-blue-500: #5f65d4;
+  --color-savoy-blue-600: #333bc1;
+  --color-savoy-blue-700: #272c91;
+  --color-savoy-blue-800: #1a1d61;
+  --color-savoy-blue-900: #0d0f30;
+  --color-savoy-blue: #5f65d4;
 
-         &:hover {
-            @apply bg-persian-red-500;
-         }
-      }
+  --color-violet-blue-100: #dbdcf1;
+  --color-violet-blue-200: #b7b9e3;
+  --color-violet-blue-300: #9396d5;
+  --color-violet-blue-400: #6f73c7;
+  --color-violet-blue-500: #4a4fb8;
+  --color-violet-blue-600: #3a3f96;
+  --color-violet-blue-700: #2c2f70;
+  --color-violet-blue-800: #1d1f4b;
+  --color-violet-blue-900: #0f1025;
+  --color-violet-blue: #4a4fb8;
 
-      &.success {
-         @apply bg-emerald-500 text-raisin-black-500;
+  --color-anti-flash-white: #f5f7fa;
 
-         &:hover {
-            @apply bg-pigment-green-500 text-raisin-black-500;
-         }
-      }
+  --color-platinum-100: #f9fafb;
+  --color-platinum-200: #f3f5f6;
+  --color-platinum-300: #eeeff2;
+  --color-platinum-400: #e8eaed;
+  --color-platinum-500: #e1e4e8;
+  --color-platinum-600: #aeb6c1;
+  --color-platinum-700: #7a8899;
+  --color-platinum-800: #505a68;
+  --color-platinum-900: #282d34;
+  --color-platinum: #e1e4e8;
 
-      &.accent {
-         @apply bg-lavender text-savoy-blue-500;
+  --color-poppy-100: #f7d9d9;
+  --color-poppy-200: #eeb4b4;
+  --color-poppy-300: #e68e8e;
+  --color-poppy-400: #de6868;
+  --color-poppy-500: #d64545;
+  --color-poppy-600: #b82828;
+  --color-poppy-700: #8a1e1e;
+  --color-poppy-800: #5c1414;
+  --color-poppy-900: #2e0a0a;
+  --color-poppy: #d64545;
 
-         &:hover {
-            @apply bg-savoy-blue-300 text-savoy-blue-500;
-         }
-      }
-   }
+  --color-persian-red-100: #f3d8d8;
+  --color-persian-red-200: #e7b1b1;
+  --color-persian-red-300: #da8b8b;
+  --color-persian-red-400: #ce6464;
+  --color-persian-red-500: #c13d3d;
+  --color-persian-red-600: #9b3131;
+  --color-persian-red-700: #742525;
+  --color-persian-red-800: #4e1818;
+  --color-persian-red-900: #270c0c;
+  --color-persian-red: #c13d3d;
+
+  --color-emerald-100: #dff6e7;
+  --color-emerald-200: #bfedce;
+  --color-emerald-300: #9fe5b6;
+  --color-emerald-400: #7fdc9e;
+  --color-emerald-500: #5ed385;
+  --color-emerald-600: #35c063;
+  --color-emerald-700: #27904a;
+  --color-emerald-800: #1a6032;
+  --color-emerald-900: #0d3019;
+  --color-emerald: #5ed385;
+
+  --color-pigment-green-100: #d3f2dd;
+  --color-pigment-green-200: #a7e5bc;
+  --color-pigment-green-300: #7bd89a;
+  --color-pigment-green-400: #4fca78;
+  --color-pigment-green-500: #33ad5b;
+  --color-pigment-green-600: #298a4a;
+  --color-pigment-green-700: #1f6837;
+  --color-pigment-green-800: #154525;
+  --color-pigment-green-900: #0a2312;
+  --color-pigment-green: #33ad5b;
+
+  --color-raisin-black-100: #c9cedc;
+  --color-raisin-black-200: #939dba;
+  --color-raisin-black-300: #5f6d95;
+  --color-raisin-black-400: #3c465f;
+  --color-raisin-black-500: #1a1e29;
+  --color-raisin-black-600: #151820;
+  --color-raisin-black-700: #101218;
+  --color-raisin-black-800: #0a0c10;
+  --color-raisin-black-900: #050608;
+  --color-raisin-black: #1a1e29;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility button {
+  @apply px-4 py-2 rounded-full font-semibold transition duration-300;
+  @apply bg-savoy-blue-500 text-anti-flash-white;
+
+  &:hover {
+    @apply bg-violet-blue-500;
+  }
+
+  &.danger {
+    @apply bg-poppy-500;
+
+    &:hover {
+      @apply bg-persian-red-500;
+    }
+  }
+
+  &.success {
+    @apply bg-emerald-500 text-raisin-black-500;
+
+    &:hover {
+      @apply bg-pigment-green-500 text-raisin-black-500;
+    }
+  }
+
+  &.accent {
+    @apply bg-lavender text-savoy-blue-500;
+
+    &:hover {
+      @apply bg-savoy-blue-300 text-savoy-blue-500;
+    }
+  }
 }
