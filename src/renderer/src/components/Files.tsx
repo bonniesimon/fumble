@@ -10,19 +10,21 @@ import UndoIcon from "./Icons/UndoIcon";
 import ProgressBar from "./ProgressBar";
 
 const Files = () => {
-   const [images, setImages] = useState([]);
+   const [images, setImages] = useState<string[]>([]);
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-   const [filesToBeDeleted, setFilesToBeDeleted] = useState([]);
+   const [filesToBeDeleted, setFilesToBeDeleted] = useState<string[]>([]);
    const [showFinalScreen, setShowFinalScreen] = useState(false);
 
    const [searchParams] = useSearchParams();
 
    const getFilesForPath = async () => {
-      const files = await window.api.getAllImageFileNames(searchParams.get("path"));
+      const path = searchParams.get("path");
+      if (!path) return;
+      const files = await window.api.getAllImageFileNames(path);
       setImages(files.filter(filename => filename !== ".DS_Store"));
    };
 
-   const getFullPath = filename => `${searchParams.get("path")}/${filename}`;
+   const getFullPath = (filename: string) => `${searchParams.get("path")}/${filename}`;
 
    const handlePassImage = () => {
       console.info(getFullPath(images[currentImageIndex]));
@@ -58,7 +60,7 @@ const Files = () => {
    return (
       <div className="h-screen">
          <header className="pt-5 px-5 w-full flex justify-between items-start sticky top-0">
-            <Breadcrumbs currentPath={searchParams.get("path")} />
+            <Breadcrumbs currentPath={searchParams.get("path") || ""} />
             <Link className="button accent text-sm px-3 py-1 font-normal" to={routes.index}>
                Open another directory
             </Link>
@@ -98,7 +100,7 @@ const Files = () => {
                   </button>
                </div>
             )}
-            {showFinalScreen && <FinalScreen {...{ filesToBeDeleted }} />}
+            {showFinalScreen && <FinalScreen filesToBeDeleted={filesToBeDeleted} />}
          </div>
       </div>
    );

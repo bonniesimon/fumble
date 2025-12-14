@@ -1,5 +1,5 @@
 import { electronApp, optimizer } from "@electron-toolkit/utils";
-import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { app, shell, BrowserWindow, ipcMain, IpcMainInvokeEvent } from "electron";
 import { protocol } from "electron";
 import { join } from "path";
 
@@ -8,7 +8,7 @@ import { registerRoute } from "../lib/electron-router-dom";
 import { FILE_PROTOCOL } from "../shared/fileProtocol";
 import { bulkDeleteFiles, fakeBulkDeleteFiles, getAllImageFileNames, handleFileOpen } from "./file";
 
-function createWindow() {
+function createWindow(): void {
    // Create the browser window.
    const mainWindow = new BrowserWindow({
       width: 1400,
@@ -49,11 +49,13 @@ function createWindow() {
 
 protocol.registerSchemesAsPrivileged([{ scheme: FILE_PROTOCOL, privileges: { bypassCSP: true } }]);
 
-const IPC_HANDLERS = {
-   "dialog:openFile": handleFileOpen,
-   "file:getAllImageFileNames": getAllImageFileNames,
-   "file:bulkDeleteFiles": bulkDeleteFiles,
-   "file:fakeBulkDeleteFiles": fakeBulkDeleteFiles,
+type IpcHandler = (event: IpcMainInvokeEvent, ...args: unknown[]) => unknown;
+
+const IPC_HANDLERS: Record<string, IpcHandler> = {
+   "dialog:openFile": handleFileOpen as IpcHandler,
+   "file:getAllImageFileNames": getAllImageFileNames as IpcHandler,
+   "file:bulkDeleteFiles": bulkDeleteFiles as IpcHandler,
+   "file:fakeBulkDeleteFiles": fakeBulkDeleteFiles as IpcHandler,
 };
 
 // This method will be called when Electron has finished

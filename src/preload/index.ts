@@ -3,10 +3,12 @@ import { contextBridge, ipcRenderer } from "electron";
 
 // Custom APIs for renderer
 const api = {
-   openFile: () => ipcRenderer.invoke("dialog:openFile"),
-   getAllImageFileNames: path => ipcRenderer.invoke("file:getAllImageFileNames", path),
-   bulkDeleteFiles: filePaths => ipcRenderer.invoke("file:bulkDeleteFiles", filePaths),
-   fakeBulkDeleteFiles: () => ipcRenderer.invoke("file:fakeBulkDeleteFiles"),
+   openFile: (): Promise<string | undefined> => ipcRenderer.invoke("dialog:openFile"),
+   getAllImageFileNames: (path: string): Promise<string[]> =>
+      ipcRenderer.invoke("file:getAllImageFileNames", path),
+   bulkDeleteFiles: (filePaths: string[]): Promise<void> =>
+      ipcRenderer.invoke("file:bulkDeleteFiles", filePaths),
+   fakeBulkDeleteFiles: (): Promise<void> => ipcRenderer.invoke("file:fakeBulkDeleteFiles"),
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to
@@ -20,6 +22,8 @@ if (process.contextIsolated) {
       console.error(error);
    }
 } else {
+   // @ts-ignore (define in dts)
    window.electron = electronAPI;
+   // @ts-ignore (define in dts)
    window.api = api;
 }

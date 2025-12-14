@@ -1,13 +1,21 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const COLOR_STATUS_MAP = {
+type ToastStatus = "success" | "error" | "warning";
+
+const COLOR_STATUS_MAP: Record<ToastStatus, string> = {
    success: "bg-emerald",
    error: "bg-persian-red-500",
    warning: "bg-amber-400",
 };
 
-const Toast = ({ message, onClose, status = "success" }) => {
+interface ToastProps {
+   message: string;
+   onClose: () => void;
+   status?: ToastStatus;
+}
+
+const Toast = ({ message, onClose, status = "success" }: ToastProps) => {
    const [visible, setVisible] = useState(true);
 
    useEffect(() => {

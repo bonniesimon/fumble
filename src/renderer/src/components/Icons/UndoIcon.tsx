@@ -1,4 +1,16 @@
-const UndoIcon = ({ size = 24, color = "#5F65D4", className = "", ariaLabel = "Undo action" }) => {
+interface UndoIconProps {
+   size?: number;
+   color?: string;
+   className?: string;
+   ariaLabel?: string;
+}
+
+const UndoIcon = ({
+   size = 24,
+   color = "#5F65D4",
+   className = "",
+   ariaLabel = "Undo action",
+}: UndoIconProps) => {
    return (
       <svg
          width={size}

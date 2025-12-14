@@ -1,4 +1,8 @@
-const FolderIcon = ({ className }) => {
+interface FolderIconProps {
+   className?: string;
+}
+
+const FolderIcon = ({ className }: FolderIconProps) => {
    return (
       <svg
          className={`w-4 h-4 ${className}`}

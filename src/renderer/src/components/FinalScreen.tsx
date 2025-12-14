@@ -7,9 +7,13 @@ import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
 import routes from "../constants/routes";
 import Spinner from "./Spinner";
 
-const FinalScreen = ({ filesToBeDeleted }) => {
+interface FinalScreenProps {
+   filesToBeDeleted: string[];
+}
+
+const FinalScreen = ({ filesToBeDeleted }: FinalScreenProps) => {
    const [deletionInProgress, setDeletionInProgress] = useState(false);
-   const [unselectedImages, setUnselectedImages] = useState([]);
+   const [unselectedImages, setUnselectedImages] = useState<string[]>([]);
    const navigate = useNavigate();
 
    const handleBulkDeletion = async () => {
@@ -25,7 +29,7 @@ const FinalScreen = ({ filesToBeDeleted }) => {
       navigate(routes.index + `?notice=${encodeURIComponent("Deleted files successfully")}`);
    };
 
-   const toggleImageSelection = imagePath => {
+   const toggleImageSelection = (imagePath: string) => {
       setUnselectedImages(prev =>
          prev.includes(imagePath) ? prev.filter(path => path !== imagePath) : [...prev, imagePath]
       );

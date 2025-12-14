@@ -1,8 +1,9 @@
 import { dialog } from "electron/main";
+import { IpcMainInvokeEvent } from "electron";
 import { readdir, unlink } from "fs/promises";
 import { extname } from "path";
 
-const handleFileOpen = async () => {
+const handleFileOpen = async (): Promise<string | undefined> => {
    const { canceled, filePaths } = await dialog.showOpenDialog({
       properties: ["openDirectory"],
    });
@@ -11,7 +12,10 @@ const handleFileOpen = async () => {
    }
 };
 
-const getAllImageFileNames = async (_, path) => {
+const getAllImageFileNames = async (
+   _event: IpcMainInvokeEvent,
+   path: string
+): Promise<string[]> => {
    const allFiles = await readdir(path);
    const imageFiles = allFiles.filter(file =>
       [".jpg", ".jpeg", ".png", ".gif"].includes(extname(file).toLowerCase())
@@ -36,7 +40,10 @@ const getAllImageFileNames = async (_, path) => {
    return filteredImageFilesForMac;
 };
 
-const bulkDeleteFiles = (_, filePaths) => {
+const bulkDeleteFiles = (
+   _event: IpcMainInvokeEvent,
+   filePaths: string[]
+): Promise<void[] | void> => {
    if (process.env.ELECTRON_ENV == "development") {
       console.info("fakeBulkDeleteFiles ran");
       return fakeBulkDeleteFiles();
@@ -45,7 +52,7 @@ const bulkDeleteFiles = (_, filePaths) => {
    return Promise.all(filePaths.map(path => unlink(path)));
 };
 
-const fakeBulkDeleteFiles = () =>
+const fakeBulkDeleteFiles = (): Promise<void> =>
    new Promise(resolve => {
       setTimeout(resolve, 1000);
    });

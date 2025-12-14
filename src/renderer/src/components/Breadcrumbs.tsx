@@ -2,7 +2,11 @@ import React from "react";
 
 import FolderIcon from "./Icons/FolderIcon";
 
-const Breadcrumbs = ({ currentPath }) => {
+interface BreadcrumbsProps {
+   currentPath: string;
+}
+
+const Breadcrumbs = ({ currentPath }: BreadcrumbsProps) => {
    const path = currentPath.split("/").filter(Boolean);
 
    return (

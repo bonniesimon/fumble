@@ -3,6 +3,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import routes from "../constants/routes";
 import Toast from "./Toast";
 
+type ToastStatus = "success" | "error" | "warning";
+
 const OpenDialog = () => {
    const navigate = useNavigate();
    const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +19,7 @@ const OpenDialog = () => {
    };
 
    const isShowNoticeToast = searchParams.get("notice") && searchParams.get("notice") !== "";
+   const noticeKind = (searchParams.get("notice-kind") || "success") as ToastStatus;
 
    return (
       <>
@@ -27,9 +30,14 @@ const OpenDialog = () => {
          </div>
          {isShowNoticeToast && (
             <Toast
-               status={searchParams.get("notice-kind") || "success"}
-               message={searchParams.get("notice")}
-               onClose={() => setSearchParams(curr => curr.delete("notice"))}
+               status={noticeKind}
+               message={searchParams.get("notice") || ""}
+               onClose={() => {
+                  const newParams = new URLSearchParams(searchParams);
+                  newParams.delete("notice");
+                  newParams.delete("notice-kind");
+                  setSearchParams(newParams);
+               }}
             />
          )}
       </>
