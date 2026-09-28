@@ -2,8 +2,9 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
+import { toFileProtocolUrl } from "../../../shared/fileProtocol";
 import routes from "../constants/routes";
+import { joinPath } from "../utils/path";
 import Breadcrumbs from "./Breadcrumbs";
 import FinalScreen from "./FinalScreen";
 import UndoIcon from "./Icons/UndoIcon";
@@ -24,7 +25,7 @@ const Files = () => {
       setImages(files.filter(filename => filename !== ".DS_Store"));
    };
 
-   const getFullPath = (filename: string) => `${searchParams.get("path")}/${filename}`;
+   const getFullPath = (filename: string) => joinPath(searchParams.get("path") || "", filename);
 
    const handlePassImage = () => {
       console.info(getFullPath(images[currentImageIndex]));
@@ -71,7 +72,7 @@ const Files = () => {
                   <div className="w-[400px] h-[225px] md:w-[640px] md:h-[360px] lg:w-[768px] lg:h-[432px] relative">
                      <img
                         key={images[currentImageIndex]}
-                        src={`${FILE_PROTOCOL}:///${searchParams.get("path")}/${images[currentImageIndex]}`}
+                        src={toFileProtocolUrl(getFullPath(images[currentImageIndex]))}
                         className="absolute w-full h-full object-contain"
                      />
                   </div>

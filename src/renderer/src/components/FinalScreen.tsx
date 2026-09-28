@@ -3,8 +3,9 @@ import { X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { FILE_PROTOCOL } from "../../../shared/fileProtocol";
+import { toFileProtocolUrl } from "../../../shared/fileProtocol";
 import routes from "../constants/routes";
+import { basename } from "../utils/path";
 import Spinner from "./Spinner";
 
 interface FinalScreenProps {
@@ -69,7 +70,7 @@ const FinalScreen = ({ filesToBeDeleted }: FinalScreenProps) => {
                   onClick={() => toggleImageSelection(image)}
                >
                   <img
-                     src={`${FILE_PROTOCOL}:///${image}`}
+                     src={toFileProtocolUrl(image)}
                      className="w-full h-48 object-cover"
                      alt="Selected file"
                   />
@@ -79,7 +80,7 @@ const FinalScreen = ({ filesToBeDeleted }: FinalScreenProps) => {
                      </div>
                   )}
                   <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 truncate">
-                     {image.split("/").pop()}
+                     {basename(image)}
                   </div>
                </div>
             ))}

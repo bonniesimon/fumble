@@ -5,7 +5,7 @@ import { join } from "path";
 
 import icon from "../../resources/icon.png?asset";
 import { registerRoute } from "../lib/electron-router-dom";
-import { FILE_PROTOCOL } from "../shared/fileProtocol";
+import { FILE_PROTOCOL, fromFileProtocolUrl } from "../shared/fileProtocol";
 import { bulkDeleteFiles, fakeBulkDeleteFiles, getAllImageFileNames, handleFileOpen } from "./file";
 
 function createWindow(): void {
@@ -63,9 +63,8 @@ const IPC_HANDLERS: Record<string, IpcHandler> = {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
    protocol.registerFileProtocol(FILE_PROTOCOL, (request, callback) => {
-      const url = request.url.replace(`${FILE_PROTOCOL}://`, "");
       try {
-         return callback(decodeURIComponent(url));
+         return callback(fromFileProtocolUrl(request.url));
       } catch (error) {
          // Handle the error as needed
          console.error(error);
