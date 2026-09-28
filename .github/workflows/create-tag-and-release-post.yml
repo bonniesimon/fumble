@@ -12,8 +12,13 @@ jobs:
       # Run only if commit message contains [bump-version]
       if: contains(github.event.head_commit.message, '[bump-version]')
       runs-on: macos-latest
+      outputs:
+         tag: v${{ steps.get-version.outputs.version }}
 
       steps:
+         - name: Checkout code
+           uses: actions/checkout@v4
+
          - name: Get version from package.json
            id: get-version
            run: |
@@ -35,3 +40,11 @@ jobs:
               release_name: Release v${{ steps.get-version.outputs.version }}
               draft: false
               prerelease: false
+
+   build-windows:
+      needs: release
+      permissions:
+         contents: write
+      uses: ./.github/workflows/build-windows.yml
+      with:
+         tag: ${{ needs.release.outputs.tag }}

@@ -1,0 +1,46 @@
+name: Build Windows app and upload to release
+
+on:
+   # Called from the tag-and-release workflow after the release post is created
+   workflow_call:
+      inputs:
+         tag:
+            required: true
+            type: string
+   # Manual trigger to build/upload for an existing release (e.g. v0.2.5)
+   workflow_dispatch:
+      inputs:
+         tag:
+            description: "Existing release tag to build and upload to (e.g. v0.2.5)"
+            required: true
+            type: string
+
+jobs:
+   build-windows:
+      permissions:
+         contents: write
+      runs-on: windows-latest
+
+      steps:
+         - name: Checkout code
+           uses: actions/checkout@v4
+           with:
+              ref: ${{ inputs.tag }}
+
+         - name: Setup Node.js
+           uses: actions/setup-node@v4
+           with:
+              node-version: "20"
+              cache: "yarn"
+
+         - name: Install dependencies
+           run: yarn install --frozen-lockfile
+
+         - name: Build Windows installer
+           run: yarn build && yarn electron-builder --win --publish never
+
+         - name: Upload installer to release
+           shell: bash
+           env:
+              GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           run: gh release upload "${{ inputs.tag }}" dist/*-setup.exe --clobber
