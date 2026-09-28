@@ -1,6 +1,6 @@
 {
    "name": "fumble",
-   "version": "0.2.5",
+   "version": "0.2.6",
    "description": "Interactively Delete Images",
    "main": "./out/main/index.js",
    "author": "bonniesimon",
